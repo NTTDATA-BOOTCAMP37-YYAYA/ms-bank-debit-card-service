@@ -1,0 +1,37 @@
+server:
+  port: 8103
+spring:
+  application:
+    name: ms-bank-debit-card-service
+  #config:
+  # import: optional:configserver:http://localhost:8888
+  data: 
+    mongodb:
+     host: localhost
+     port: 27017
+     database: Bank
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+    registerWithEureka: true
+    fetchRegistry: true
+
+kafka:
+  topic:
+     bank:
+      debit-card-associated-account:
+        create:
+          name: bank-debit-card-associated-account-create
+          
+client:
+  bank:
+    account:
+      url: http://localhost:8101/account
+
